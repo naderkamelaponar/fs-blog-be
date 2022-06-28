@@ -1,9 +1,9 @@
 // بسم الله الرحمن الرحيم
-//const config = require('./utils/config')
 const express = require("express");
-const app = express();
-const blogRouters=require("./controller/blog");
+require("express-async-errors");
 const cors = require("cors");
+const blogRouters=require("./controller/blog");
+const app = express();
 app.use(cors());
 app.use(express.json());
 app.get("/api",()=>{
