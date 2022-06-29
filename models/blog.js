@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const config = require("../utils/config");
 const mongoUrl = config.MONGO_URI;
 mongoose.connect(mongoUrl).then(() => {
-   console.log("connected to db");
+   console.info("connected to db");
 });
 const blogSchema = new mongoose.Schema({
    title: { type: String, required: true },

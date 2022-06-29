@@ -58,6 +58,25 @@ describe(" Verify that the blog list application ", () => {
          });
       });
       describe("handling a specifc blog id ", () => {
+         test("get respond should return 200 if id exist", async () => {
+            await api.get(`/api/blogs/${id2Delete}`).expect(200);
+         });
+         test("get request should return 404 if id NOT exist", async () => {
+            const notExist = await blogHelper.idNotExist();
+            await api.delete(`/api/blogs/${notExist}`).expect(404);
+         });
+         test("put  request should return 200 when update", async () => {
+            const newBlog = {
+               title: "updated",
+               author: "nb Author 1",
+               url: "nb Url 1",
+               likes: 1,
+            };
+            await api
+               .put(`/api/blogs/${id2Delete}`)
+               .send(newBlog)
+               .expect(202);
+         });
          test("delete request should return 204 if id exist", async () => {
             await api.delete(`/api/blogs/${id2Delete}`).expect(204);
          });

@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.get("/api", () => {
-   console.log("there's no god but Allah ");
+	console.info("there's no god but Allah ");
 });
 
 app.use("/api/blogs",blogRouters);

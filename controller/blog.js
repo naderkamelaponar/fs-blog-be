@@ -31,11 +31,39 @@ blogsRouter.post("/", async (request, response) => {
       return response.status(500).json({ message: error.message });
    }
 });
+blogsRouter.get("/:id", async (request, response) => {
+   const id = request.params.id;
+
+   try {
+      const blogs = await Blog.findById({ _id: id });
+      if (blogs) return response.json(blogs);
+      else
+         return response
+            .status(404)
+            .json({ message: "No blogs found" });
+   } catch (error) {
+      return response.status(500).json({ message: error.message });
+   }
+});
 blogsRouter.delete("/:id", async (request, response) => {
    const id = request.params.id;
    try {
       const res = await Blog.findByIdAndDelete(id);
       if (res) return response.status(204).json(id);
+      else
+         return response
+            .status(404)
+            .json({ message: "No blog found" });
+   } catch (error) {
+      return response.status(500).json({ message: error.message });
+   }
+});
+blogsRouter.put("/:id", async (request, response) => {
+   const id = request.params.id;
+   const blog = request.body;
+   try {
+      const res = await Blog.findByIdAndUpdate(id, blog);
+      if (res) return response.status(202).json(res);
       else
          return response
             .status(404)
