@@ -2,7 +2,7 @@
 require("dotenv").config();
 
 const PORT =
-   process.env.NODE_ENV === "test" ? process.env.PORT : 3001;
+   process.env.NODE_ENV === "test" ? 3003 : process.env.PORT;
 const MONGO_URI =
    process.env.NODE_ENV === "test"
       ? process.env.MONGODB_URI_TEST
