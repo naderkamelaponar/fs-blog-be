@@ -1,7 +1,7 @@
 // بسم الله الرحمن الرحيم
 const blogsRouter = require("express").Router();
 const Blog = require("../models/blog");
-require("express-async-errors");
+
 blogsRouter.get("/", async (_, response) => {
    try {
       const blogs = await Blog.find({});
