@@ -6,11 +6,11 @@ const blogRouters = require("./controller/blog");
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.get("/", () => {
-	console.info("there's no god but Allah ");
+app.get("/", (_,res) => {
+	res.status(200).json({"there's no god but Allah ":"Mohammad is the Messenger of Allah"});
 });
 app.use("/api/blogs",blogRouters);
 app.use("*",(_,res)=>{
-	res.status(404).send("404 not found");
+	res.status(404).send("ah You're lost");
 })
 module.exports = app;
