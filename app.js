@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.get("/", (_,res) => {
-	res.status(200).json({"there's no god but Allah ":"Mohammad is the Messenger of Allah"});
+	res.status(200).json({"start":{"there's no god but Allah ":"Mohammad is the Messenger of Allah"},"then":"$url/api/blogs"});
 });
 app.use("/api/blogs",blogRouters);
 app.use("*",(_,res)=>{
