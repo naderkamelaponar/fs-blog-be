@@ -19,10 +19,11 @@ loginRouter.post("/", async (request, response) => {
 		return response.status(401).json("wrong login parameters");
 	const user2Authenticate = {
 		username: user.username,
+		name:user.name,
 		id: user._id,
 	};
 	const token = jwt.sign(user2Authenticate, config.secretWord);
 	//if (!user || !passwordCorrect) return
-	return response.status(200).json(token);
+	return response.status(200).json({token,user:user2Authenticate});
 });
 module.exports = loginRouter;
