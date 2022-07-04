@@ -6,8 +6,9 @@ const User = require("../models/users_model");
 const config = require("../utils/config");
 loginRouter.post("/", async (request, response) => {
 	const { username, password } = request.body;
-
-	if (!username || !password)
+	console.log(request.body,request)
+	try {
+		if (!username || !password)
 		return response.status(400).json("missing login parameters");
 	const user = await User.findOne({ username });
 
@@ -25,5 +26,8 @@ loginRouter.post("/", async (request, response) => {
 	const token = jwt.sign(user2Authenticate, config.secretWord);
 	//if (!user || !passwordCorrect) return
 	return response.status(200).json({token,user:user2Authenticate});
+	} catch (error) {
+		console.log(error)
+	}
 });
 module.exports = loginRouter;
