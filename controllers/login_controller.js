@@ -19,9 +19,6 @@ console.log('authenticated',user)
 }
 loginRouter.post("/", async (request, response) => {
 	const { username, password } = request.body;
-	
-	try {
-		
 	const user = await authenticatedUser(username,password)
 	if (!user) return response.status(401).json("wrong login parameters");
 	const user2Authenticate = {
@@ -31,8 +28,5 @@ loginRouter.post("/", async (request, response) => {
 	};
 	const token =  jwt.sign(user2Authenticate, config.secretWord);
 	return response.status(200).json({token,user:user2Authenticate});
-	} catch (error) {
-		console.log(error)
-	}
 });
 module.exports = loginRouter;
