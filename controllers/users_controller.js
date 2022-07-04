@@ -27,7 +27,6 @@ usersRouter.get("/", async (_, response) => {
 
 usersRouter.post("/", async (request, response) => {
 	const user = new User(request.body);
-	console.log(config.saltRounds);
 	if (!user.name || !user.username || !user.password)
 		return response
 			.status(400)

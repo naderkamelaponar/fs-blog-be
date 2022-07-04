@@ -10,14 +10,12 @@ const authenticatedUser= async (username,password)=>{
 		if (!username || !password)
 		return response.status(400).json("missing login parameters");
 	const user = await User.findOne({ username });
-
+console.log('authenticated',user)
 	const validPassword =
-      user === null
-      	? null
-      	: await bcrypt.compare(password, user.password);
+      user ? await bcrypt.compare(password, user.password):null
 		return user && validPassword ? user :null
 	} catch (error) {
-		console.log(error)
+		
 	}
 }
 loginRouter.post("/", async (request, response) => {
