@@ -8,8 +8,8 @@ const authenticatedUser= async (username,password)=>{
 	try {
 		if (!username || !password)
 		return response.status(400).json("missing login parameters");
-	const user = await User.findOne({ username });
-console.log('authenticated',user)
+	const user =  User.findOne({ username });
+
 	const validPassword =
       user ? await bcrypt.compare(password, user.password):null
 		return user && validPassword ? user :null
