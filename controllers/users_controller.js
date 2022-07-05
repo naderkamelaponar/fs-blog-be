@@ -2,6 +2,7 @@
 const usersRouter = require("express").Router();
 const User = require("../models/users_model");
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken')
 const config = require("../utils/config");
 const authorize = require("./middlewares/authorization");
 const getUsers = async (id = "") => {
@@ -36,16 +37,23 @@ usersRouter.post("/", async (request, response) => {
 		return response
 			.status(400)
 			.json({ message: "username already exists" });
-	const hashPassword = await bcrypt.hash(
+	const hashSalt= Number(config.hashSalt)
+	const hashPassword =  await bcrypt.hash(
 		user.password,
-		Number(config.saltRounds)
+		hashSalt
 	);
 	user.password = hashPassword;
 	try {
 		const res = await user.save();
-		if (res) return response.status(201).json(res);
+		const user2Authenticate = {
+			username: res.username,
+			name:res.name,
+			id: res._id,
+		};
+		const token =  jwt.sign(user2Authenticate, config.secretWord);
+		return response.status(201).json({token,user:user2Authenticate});
 	} catch (error) {
-		return response.status(500).json({ message: "Opss !" });
+		return response.status(500).json({ message: error.message });
 	}
 });
 usersRouter.get("/:id", async (request, response) => {

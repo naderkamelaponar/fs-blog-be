@@ -102,11 +102,10 @@ blogsRouter.put("/:id", authorize, async (request, response) => {
 	try {
 		const res = await Blog.findByIdAndUpdate(id, blog);
 		if (res) {
-			const xs = user.blogs.filter((a) => {
+			const uIdInBlog = user.blogs.filter((a) => {
 				return a == id;
 			});
-			console.log(xs);
-			if (!xs) user.blogs.push(id);
+			if (!uIdInBlog) user.blogs.push(id);
 			await user.save();
 			return response.status(202).json(res);
 		} else
