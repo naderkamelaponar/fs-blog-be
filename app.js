@@ -6,6 +6,7 @@ const userRouters = require("./controllers/users_controller");
 const loginRouter = require("./controllers/login_controller");
 const app = express();
 app.use(cors());
+app.use(express.static('build'))
 app.use(express.json());
 app.get("/", (_,res) => {
 	res.status(200).json({"start":{"there's no god but Allah ":"Mohammad is the Messenger of Allah"},"then":"$url/api/blogs"});
