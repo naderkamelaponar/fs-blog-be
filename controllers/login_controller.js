@@ -9,7 +9,7 @@ const authenticatedUser= async (username,password)=>{
 	
 	const user = await User.findOne({ username });
 	const validPassword =
-      user ? await bcrypt.compare(password, user.password):null
+      user ?await  bcrypt.compare(password, user.password):null
 		return user && validPassword ? user :null
 	} catch (error) {
 		return response.status(500).json({ message: error.message });

@@ -71,7 +71,7 @@ blogsRouter.delete("/:id", authorize, async (request, response) => {
 		? await blogOwner(request.body.user, id)
 		: null;
 	if (!user)
-		return response.status(401).json({ error: "not Authorized" });
+		return response.status(401).json({ message: "not Authorized" });
 	try {
 		const res = await Blog.findByIdAndDelete(id);
 
@@ -97,7 +97,7 @@ blogsRouter.put("/:id", authorize, async (request, response) => {
 		? await blogOwner(request.body.user, id)
 		: null;
 	if (!user)
-		return response.status(401).json({ error: "not Authorized" });
+		return response.status(401).json({ message: "not Authorized" });
 
 	try {
 		const res = await Blog.findByIdAndUpdate(id, blog);
