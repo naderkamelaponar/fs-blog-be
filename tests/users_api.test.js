@@ -4,7 +4,7 @@ const supertest = require("supertest");
 const app = require("../app");
 const api = supertest(app);
 const User = require("../models/users_model");
-const userHelper = require("../utils/users_test_helper");
+const userHelper = require("../utils/test_helpers/users_test_helper");
 beforeAll(async () => {
 	await User.deleteMany({});
 	const userObjects = userHelper.initUsers.map(

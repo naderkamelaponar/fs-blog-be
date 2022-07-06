@@ -1,5 +1,5 @@
 // بسم الله الرحمن الرحيم
-const User = require("../models/users_model");
+const User = require("../../models/users_model");
 const initUsers = [
 	{
 		name:"big boss",
