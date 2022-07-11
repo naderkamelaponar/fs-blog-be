@@ -2,9 +2,9 @@
 const jwt = require("jsonwebtoken");
 const config= require("../../utils/config");
 const authorize = (req,res,next)=>{
-	
+	const authHead =req.get("authorization")?req.get("authorization"):null;
 	try {
-		const authHead =req.get("authorization");
+		
 		if (authHead){
 			const token = authHead ? authHead.split(" ")[1]:"";
 			const decode =  jwt.verify(token,config.secretWord);
